@@ -1,2 +1,2 @@
 # python_training
-Тренинг для тестировщиков http://software-testing.ru
+Тренинг программирования на Python для тестировщиков http://software-testing.ru
