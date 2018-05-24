@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from selenium.webdriver.firefox.webdriver import WebDriver
 import unittest
-from group import Group
+from models import Group
 
 def is_alert_present(wd):
     try:
@@ -15,33 +15,29 @@ class test_add_group(unittest.TestCase):
         self.wd = WebDriver(capabilities={"marionette": False}, firefox_binary="/home/asteroid/programms/firefox/firefox")
         self.wd.implicitly_wait(60)
 
-    def test_add_group(self):
+    # def test_add_group(self):
+    #     wd = self.wd
+    #     self.open_home_page(wd)
+    #     self.login(wd, username="admin", password="secret")
+    #     self.create_group_form(wd, Group(name="test progon", header="jhvgvhgv", footer="khgcvkvv"))
+    #     self.return_to_group_page(wd)
+    #     self.logout(wd)
+    #
+    # def test_add_empty_group(self):
+    #     wd = self.wd
+    #     self.open_home_page(wd)
+    #     self.login(wd, username="admin", password="secret")
+    #     self.create_group_form(wd, Group(name="", header="", footer=""))
+    #     self.return_to_group_page(wd)
+    #     self.logout(wd)
+
+    def test_add_person(self):
         wd = self.wd
         self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
-        self.create_group_form(wd, Group(name="test progon", header="jhvgvhgv", footer="khgcvkvv"))
-        self.return_to_group_page(wd)
-        self.logout(wd)
-
-    def test_add_empty_group(self):
-        wd = self.wd
-        self.open_home_page(wd)
-        self.login(wd, username="admin", password="secret")
-        self.create_group_form(wd, Group(name="", header="", footer=""))
-        self.return_to_group_page(wd)
-        self.logout(wd)
-
-    def test_test_add_person(self):
-        wd = self.wd
-        wd.get("http://localhost/addressbook/")
-        wd.find_element_by_name("user").click()
-        wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys("admin")
-        wd.find_element_by_name("pass").click()
-        wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys("secret")
-        wd.find_element_by_xpath("//form[@id='LoginForm']/input[3]").click()
+        # init_person_creation
         wd.find_element_by_link_text("add new").click()
+        # fill_person_form
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
         wd.find_element_by_name("firstname").send_keys("name for test")
@@ -57,9 +53,9 @@ class test_add_group(unittest.TestCase):
         wd.find_element_by_name("email").click()
         wd.find_element_by_name("email").clear()
         wd.find_element_by_name("email").send_keys("123@gmail.com")
-        wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
-        wd.find_element_by_link_text("Logout").click()
-        wd.find_element_by_id("content").click()
+        # submit_person_creation
+        wd.find_element_by_name("submit").click()
+        self.logout(wd)
 
     def logout(self, wd):
         wd.find_element_by_link_text("Logout").click()
