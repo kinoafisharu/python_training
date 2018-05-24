@@ -15,21 +15,21 @@ class test_for_addressbook(unittest.TestCase):
         self.wd = WebDriver(capabilities={"marionette": False}, firefox_binary="/home/asteroid/programms/firefox/firefox")
         self.wd.implicitly_wait(60)
 
-    # def test_add_group(self):
-    #     wd = self.wd
-    #     self.open_home_page(wd)
-    #     self.login(wd, username="admin", password="secret")
-    #     self.create_group_form(wd, Group(name="test progon", header="jhvgvhgv", footer="khgcvkvv"))
-    #     self.return_to_group_page(wd)
-    #     self.logout(wd)
-    #
-    # def test_add_empty_group(self):
-    #     wd = self.wd
-    #     self.open_home_page(wd)
-    #     self.login(wd, username="admin", password="secret")
-    #     self.create_group_form(wd, Group(name="", header="", footer=""))
-    #     self.return_to_group_page(wd)
-    #     self.logout(wd)
+    def test_add_group(self):
+        wd = self.wd
+        self.open_home_page(wd)
+        self.login(wd, username="admin", password="secret")
+        self.create_group_form(wd, Group(name="test progon", header="jhvgvhgv", footer="khgcvkvv"))
+        self.return_to_group_page(wd)
+        self.logout(wd)
+
+    def test_add_empty_group(self):
+        wd = self.wd
+        self.open_home_page(wd)
+        self.login(wd, username="admin", password="secret")
+        self.create_group_form(wd, Group(name="", header="", footer=""))
+        self.return_to_group_page(wd)
+        self.logout(wd)
 
     def test_add_person(self):
         wd = self.wd

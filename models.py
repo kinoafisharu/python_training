@@ -9,10 +9,10 @@ class Person:
 
     def __init__(self, name, lastname, address, email, mobile ):
         self.name = name
-        self.header = lastname
-        self.footer = address
-        self.name = email
-        self.header = mobile
+        self.lastname = lastname
+        self.address = address
+        self.email = email
+        self.mobile = mobile
 
 
 
