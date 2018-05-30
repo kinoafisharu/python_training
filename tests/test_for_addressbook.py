@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import pytest
-from models import *
-from application import Application
+from fixrures.application import Application
 
 
 @pytest.fixture()
