@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import pytest
-from fixrures.application import Application
+from fixtures.application import Application
+from models.models import *
 
 
 @pytest.fixture()
@@ -11,19 +12,19 @@ def app(request):
 
 
 def test_add_group(app):
-        app.login(username="admin", password="secret")
+        app.session.login(username="admin", password="secret")
         app.create_group_form(Group(name="test progon", header="jhvgvhgv", footer="khgcvkvv"))
-        app.logout()
+        app.session.logout()
 
 def test_add_empty_group(app):
-        app.login(username="admin", password="secret")
+        app.session.login(username="admin", password="secret")
         app.create_group_form(Group(name="", header="", footer=""))
-        app.logout()
+        app.session.logout()
 
 def test_add_person(app):
-        app.login(username="admin", password="secret")
+        app.session.login(username="admin", password="secret")
         app.create_person_form(Person(name="1", lastname="2", address="3", mobile="4", email="5"))
-        app.logout()
+        app.session.logout()
 
 
 if __name__ == '__main__':
