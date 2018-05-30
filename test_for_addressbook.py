@@ -1,103 +1,31 @@
 # -*- coding: utf-8 -*-
-from selenium.webdriver.firefox.webdriver import WebDriver
-import unittest
+import pytest
 from models import *
-
-def is_alert_present(wd):
-    try:
-        wd.switch_to_alert().text
-        return True
-    except:
-        return False
-
-class test_for_addressbook(unittest.TestCase):
-    def setUp(self):
-        self.wd = WebDriver(capabilities={"marionette": False}, firefox_binary="/home/asteroid/programms/firefox/firefox")
-        self.wd.implicitly_wait(60)
-
-    def test_add_group(self):
-        wd = self.wd
-        self.login(wd, username="admin", password="secret")
-        self.create_group_form(wd, Group(name="test progon", header="jhvgvhgv", footer="khgcvkvv"))
-        self.logout(wd)
-
-    def test_add_empty_group(self):
-        wd = self.wd
-        self.login(wd, username="admin", password="secret")
-        self.create_group_form(wd, Group(name="", header="", footer=""))
-        self.logout(wd)
-
-    def test_add_person(self):
-        wd = self.wd
-        self.login(wd, username="admin", password="secret")
-        self.create_person_form(wd, Person(name="1", lastname="2", address="3", mobile="4", email="5"))
-        self.logout(wd)
-
-    def create_person_form(self, wd, person):
-        self.open_home_page(wd)
-        # init_person_creation
-        wd.find_element_by_link_text("add new").click()
-        # fill_person_form
-        wd.find_element_by_name("firstname").click()
-        wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys(person.name)
-        wd.find_element_by_name("lastname").click()
-        wd.find_element_by_name("lastname").clear()
-        wd.find_element_by_name("lastname").send_keys(person.lastname)
-        wd.find_element_by_name("address").click()
-        wd.find_element_by_name("address").clear()
-        wd.find_element_by_name("address").send_keys(person.address)
-        wd.find_element_by_name("mobile").click()
-        wd.find_element_by_name("mobile").clear()
-        wd.find_element_by_name("mobile").send_keys(person.mobile)
-        wd.find_element_by_name("email").click()
-        wd.find_element_by_name("email").clear()
-        wd.find_element_by_name("email").send_keys(person.email)
-        # submit_person_creation
-        wd.find_element_by_name("submit").click()
+from application import Application
 
 
-    def logout(self, wd):
-        wd.find_element_by_link_text("Logout").click()
-
-    def return_to_group_page(self, wd):
-        wd.find_element_by_link_text("group page").click()
-
-    def create_group_form(self, wd, group):
-        self.open_home_page(wd)
-        # init_group_creation
-        wd.find_element_by_name("new").click()
-        # fill_group_form
-        wd.find_element_by_name("group_name").click()
-        wd.find_element_by_name("group_name").clear()
-        wd.find_element_by_name("group_name").send_keys(group.name)
-        wd.find_element_by_name("group_header").click()
-        wd.find_element_by_name("group_header").clear()
-        wd.find_element_by_name("group_header").send_keys(group.header)
-        wd.find_element_by_name("group_footer").click()
-        wd.find_element_by_name("group_footer").clear()
-        wd.find_element_by_name("group_footer").send_keys(group.footer)
-        # submit_group_creation
-        wd.find_element_by_name("submit").click()
-        self.return_to_group_page(wd)
+@pytest.fixture()
+def app(request):
+    fixture = Application()
+    request.addfinalizer(fixture.destroy)
+    return fixture
 
 
-    def login(self, wd, username, password):
-        self.open_home_page(wd)
-        wd.find_element_by_name("user").click()
-        wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys(username)
-        wd.find_element_by_id("LoginForm").click()
-        wd.find_element_by_name("pass").click()
-        wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys(password)
-        wd.find_element_by_xpath("//form[@id='LoginForm']/input[3]").click()
+def test_add_group(app):
+        app.login(username="admin", password="secret")
+        app.create_group_form(Group(name="test progon", header="jhvgvhgv", footer="khgcvkvv"))
+        app.logout()
 
-    def open_home_page(self, wd):
-        wd.get("http://localhost/addressbook/group.php")
+def test_add_empty_group(app):
+        app.login(username="admin", password="secret")
+        app.create_group_form(Group(name="", header="", footer=""))
+        app.logout()
 
-    def tearDown(self):
-        self.wd.quit()
+def test_add_person(app):
+        app.login(username="admin", password="secret")
+        app.create_person_form(Person(name="1", lastname="2", address="3", mobile="4", email="5"))
+        app.logout()
+
 
 if __name__ == '__main__':
     unittest.main()
