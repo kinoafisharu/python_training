@@ -7,7 +7,7 @@ class ObjectHelper:
 
     def create_person_form(self, person):
         wd = self.app.wd
-        self.app.open_home_page()
+        self.app.open_group_page()
         # init_person_creation
         wd.find_element_by_link_text("add new").click()
         # fill_person_form
@@ -35,7 +35,7 @@ class ObjectHelper:
 
     def create_group_form(self, group):
         wd = self.app.wd
-        self.app.open_home_page()
+        self.app.open_group_page()
         # init_group_creation
         wd.find_element_by_name("new").click()
         # fill_group_form
@@ -55,9 +55,20 @@ class ObjectHelper:
 
     def delete_first_group(self):
         wd = self.app.wd
-        self.app.open_home_page()
+        self.app.open_group_page()
         # select first group
         wd.find_element_by_name("selected[]").click()
         # submin deletion
         wd.find_element_by_name("delete").click()
         self.return_to_group_page()
+
+
+    def delete_first_person(self):
+        wd = self.app.wd
+        self.app.open_person_page()
+        # select first person
+        wd.find_element_by_name("selected[]").click()
+        # submin deletion
+        wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
+        wd.switch_to_alert().accept()
+

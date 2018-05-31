@@ -11,9 +11,13 @@ class Application:
         self.session = SessionHelper(self)
         self.object = ObjectHelper(self)
 
-    def open_home_page(self):
+    def open_group_page(self):
         wd = self.wd
         wd.get("http://localhost/addressbook/group.php")
+
+    def open_person_page(self):
+        wd = self.wd
+        wd.get("http://localhost/addressbook/")
 
     def destroy(self):
         self.wd.quit()

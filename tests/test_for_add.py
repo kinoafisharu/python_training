@@ -17,6 +17,3 @@ def test_add_person(app):
         app.object.create_person_form(Person(name="1", lastname="2", address="3", mobile="4", email="5"))
         app.session.logout()
 
-
-if __name__ == '__main__':
-    unittest.main()
