@@ -53,3 +53,11 @@ class ObjectHelper:
         self.return_to_group_page()
 
 
+    def delete_first_group(self):
+        wd = self.app.wd
+        self.app.open_home_page()
+        # select first group
+        wd.find_element_by_name("selected[]").click()
+        # submin deletion
+        wd.find_element_by_name("delete").click()
+        self.return_to_group_page()
