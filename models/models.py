@@ -1,8 +1,8 @@
 class Group:
     def __init__(self,
-                 name,
-                 header,
-                 footer,
+                 name=None,
+                 header=None,
+                 footer=None,
                  ):
         self.name = name
         self.header = header
@@ -10,11 +10,11 @@ class Group:
 
 class Person:
     def __init__(self,
-                 name,
-                 lastname,
-                 address,
-                 email,
-                 mobile,
+                 name=None,
+                 lastname=None,
+                 address=None,
+                 email=None,
+                 mobile=None,
                  ):
         self.name = name
         self.lastname = lastname
