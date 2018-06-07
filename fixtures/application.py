@@ -9,7 +9,7 @@ class Application:
             capabilities={"marionette": False},
             firefox_binary="/home/asteroid/programms/firefox/firefox",
         )
-        self.wd.implicitly_wait(60)
+        self.wd.implicitly_wait(5)
         self.session = SessionHelper(self)
         self.object = ObjectHelper(self)
 
