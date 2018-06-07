@@ -64,7 +64,6 @@ class ObjectHelper:
         wd.find_element_by_name("delete").click()
         self.return_to_group_page()
 
-
     def delete_first_person(self):
         wd = self.app.wd
         self.app.open_person_page()
@@ -73,7 +72,6 @@ class ObjectHelper:
         # submin deletion
         wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
         wd.switch_to_alert().accept()
-
 
     def edit_first_group(self, new_group_data):
         wd = self.app.wd
@@ -86,7 +84,6 @@ class ObjectHelper:
         # submit_group_update
         wd.find_element_by_name("update").click()
         self.return_to_group_page()
-
 
     def edit_group_form(self, group):
         wd = self.app.wd

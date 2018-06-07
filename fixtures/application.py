@@ -13,6 +13,14 @@ class Application:
         self.session = SessionHelper(self)
         self.object = ObjectHelper(self)
 
+    def is_valid(self):
+        try:
+            self.wd.current_url
+            return True
+        except:
+            return False
+
+
     def open_group_page(self):
         wd = self.wd
         wd.get("http://localhost/addressbook/group.php")
