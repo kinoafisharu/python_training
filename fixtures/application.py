@@ -9,7 +9,6 @@ class Application:
             capabilities={"marionette": False},
             firefox_binary="/home/asteroid/programms/firefox/firefox",
         )
-        self.wd.implicitly_wait(5)
         self.session = SessionHelper(self)
         self.object = ObjectHelper(self)
 
@@ -19,15 +18,6 @@ class Application:
             return True
         except:
             return False
-
-
-    def open_group_page(self):
-        wd = self.wd
-        wd.get("http://localhost/addressbook/group.php")
-
-    def open_person_page(self):
-        wd = self.wd
-        wd.get("http://localhost/addressbook/index.php")
 
     def destroy(self):
         self.wd.quit()

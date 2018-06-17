@@ -5,9 +5,18 @@ class ObjectHelper:
     def __init__(self, app):
         self.app = app
 
+    def open_group_page(self):
+        wd = self.app.wd
+        if not (wd.current_url.endswith("/group.php") and len(wd.find_elements_by_name("new")) > 0):
+            wd.get("http://localhost/addressbook/group.php")
+
+    def open_person_page(self):
+        wd = self.app.wd
+        wd.get("http://localhost/addressbook/index.php")
+
     def create_person_form(self, person):
         wd = self.app.wd
-        self.app.open_group_page()
+        self.open_group_page()
         # init_person_creation
         wd.find_element_by_link_text("add new").click()
         # fill_person_form
@@ -35,7 +44,7 @@ class ObjectHelper:
 
     def create_group_form(self, group):
         wd = self.app.wd
-        self.app.open_group_page()
+        self.open_group_page()
         # init_group_creation
         wd.find_element_by_name("new").click()
         self.fill_group_form(group)
@@ -58,7 +67,7 @@ class ObjectHelper:
 
     def delete_first_group(self):
         wd = self.app.wd
-        self.app.open_group_page()
+        self.open_group_page()
         self.select_first_group()
         # submin deletion
         wd.find_element_by_name("delete").click()
@@ -66,7 +75,7 @@ class ObjectHelper:
 
     def delete_first_person(self):
         wd = self.app.wd
-        self.app.open_person_page()
+        self.open_person_page()
         # select first person
         wd.find_element_by_name("selected[]").click()
         # submin deletion
@@ -75,7 +84,7 @@ class ObjectHelper:
 
     def edit_first_group(self, new_group_data):
         wd = self.app.wd
-        self.app.open_group_page()
+        self.open_group_page()
         self.select_first_group()
         # submit edit
         wd.find_element_by_name("edit").click()
@@ -87,7 +96,7 @@ class ObjectHelper:
 
     def edit_group_form(self, group):
         wd = self.app.wd
-        self.app.open_group_page()
+        self.open_group_page()
         self.select_first_group()
         # submit edit
         wd.find_element_by_name("edit").click()
@@ -102,17 +111,17 @@ class ObjectHelper:
 
     def count_group(self):
         wd = self.app.wd
-        self.app.open_group_page()
+        self.open_group_page()
         return len(wd.find_elements_by_name("selected[]"))
 
     def count_person(self):
         wd = self.app.wd
-        self.app.open_person_page()
+        self.open_person_page()
         return len(wd.find_elements_by_name("selected[]"))
 
     def edit_person_form(self, person):
         wd = self.app.wd
-        self.app.open_person_page()
+        self.open_person_page()
         # init_person_edit
         wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[7]/a/img").click()
         wd.find_element_by_name("modifiy").click()
