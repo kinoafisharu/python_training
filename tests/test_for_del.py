@@ -7,6 +7,14 @@ def test_delete_first_group(app):
     app.object.delete_first_group()
 
 
-#def test_delete_first_person(app):
-#    app.object.delete_first_person()
+def test_delete_first_person(app):
+    if app.object.count_person() == 0:
+        app.object.create_person_form(Person(name="test",
+                                             lastname="test",
+                                             address="test",
+                                             email="test",
+                                             mobile="test",
+                                             )
+                                      )
+    app.object.delete_first_person()
 

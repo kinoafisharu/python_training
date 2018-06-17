@@ -27,7 +27,7 @@ class Application:
 
     def open_person_page(self):
         wd = self.wd
-        wd.get("http://localhost/addressbook/")
+        wd.get("http://localhost/addressbook/index.php")
 
     def destroy(self):
         self.wd.quit()

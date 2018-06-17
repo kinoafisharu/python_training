@@ -105,6 +105,10 @@ class ObjectHelper:
         self.app.open_group_page()
         return len(wd.find_elements_by_name("selected[]"))
 
+    def count_person(self):
+        wd = self.app.wd
+        self.app.open_person_page()
+        return len(wd.find_elements_by_name("selected[]"))
 
     def edit_person_form(self, person):
         wd = self.app.wd
