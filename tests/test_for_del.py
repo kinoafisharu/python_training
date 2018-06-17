@@ -1,4 +1,5 @@
-from models.models import Group, Person
+from models.models import Group
+from models.models import Person
 
 
 def test_delete_first_group(app):
