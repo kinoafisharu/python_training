@@ -12,7 +12,8 @@ class ObjectHelper:
 
     def open_person_page(self):
         wd = self.app.wd
-        wd.get("http://localhost/addressbook/index.php")
+        if not (wd.current_url.endswith("/index.php") and len(wd.find_elements_by_name("selected[]")) > 0):
+            wd.get("http://localhost/addressbook/index.php")
 
     def create_person_form(self, person):
         wd = self.app.wd
