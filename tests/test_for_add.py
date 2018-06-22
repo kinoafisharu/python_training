@@ -1,6 +1,7 @@
 # coding: utf-8
 
-from models.models import Group, Person
+from models.models import Group
+from models.models import Person
 
 
 def test_add_group(app):
