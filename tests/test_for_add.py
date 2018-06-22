@@ -6,24 +6,28 @@ from models.models import Person
 
 def test_add_group(app):
     old_groups = app.object.get_group_list()
-    app.object.create_group_form(Group(name="test progon",
-                                       header="jhvgvhgv",
-                                       footer="khgcvkvv",
-                                       )
-                                 )
+    group = Group(name="test progon",
+                  header="jhvgvhgv",
+                  footer="khgcvkvv",
+                  )
+    app.object.create_group_form(group)
     new_groups = app.object.get_group_list()
     assert len(old_groups) + 1 == len(new_groups)
+    old_groups.append(group)
+    assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
 
 
 def test_add_empty_group(app):
     old_groups = app.object.get_group_list()
-    app.object.create_group_form(Group(name="",
-                                       header="",
-                                       footer="",
-                                       )
-                                 )
+    group = Group(name="",
+                  header="",
+                  footer="",
+                  )
+    app.object.create_group_form(group)
     new_groups = app.object.get_group_list()
     assert len(old_groups) + 1 == len(new_groups)
+    old_groups.append(group)
+    assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
 
 
 def test_add_person(app):
