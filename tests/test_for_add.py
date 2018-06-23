@@ -31,11 +31,16 @@ def test_add_empty_group(app):
 
 
 def test_add_person(app):
-    app.object.create_person_form(Person(name="1",
-                                         lastname="2",
-                                         address="3",
-                                         mobile="4",
-                                         email="5",
-                                         )
-                                  )
+    old_persons = app.object.get_person_list()
+    person = Person(name="1",
+                    lastname="2",
+                    address="3",
+                    mobile="4",
+                    email="5",
+                    )
+    app.object.create_person_form(person)
+    new_persons = app.object.get_person_list()
+    assert len(old_persons) + 1 == len(new_persons)
+    old_persons.append(person)
+    assert sorted(old_persons, key=Person.id_or_max) == sorted(new_persons, key=Person.id_or_max)
 

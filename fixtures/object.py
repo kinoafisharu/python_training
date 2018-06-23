@@ -1,4 +1,5 @@
-from models.models import Group, Person
+from models.models import Group
+from models.models import Person
 
 
 class ObjectHelper:
@@ -164,10 +165,9 @@ class ObjectHelper:
         self.open_person_page()
         persons = []
         for row in wd.find_elements_by_name("entry"):
-            cells = row.find_elements_by_tag_name("td")
-            id = cells[0].find_element_by_tag_name("input").get_attribute("value")
-            lastname = cells[1].text
-            firstname = cells[2].text
+            elements = row.find_elements_by_tag_name("td")
+            id = elements[0].find_element_by_tag_name("input").get_attribute("value")
+            lastname = elements[1].text
+            firstname = elements[2].text
             persons.append(Person(name=firstname, lastname=lastname, id=id))
         return persons
-    
