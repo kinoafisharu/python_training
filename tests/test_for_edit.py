@@ -38,10 +38,15 @@ def test_edit_person(app):
                                              mobile="test",
                                              )
                                       )
-    app.object.edit_person_form(Person(name="new 1",
-                                       lastname="new 2",
-                                       address="new 3",
-                                       mobile="new 4",
-                                       email="new 5",
-                                       )
-                                )
+    old_persons = app.object.get_person_list()
+    person = Person(name="new 1",
+                    lastname="new 2",
+                    address="new 3",
+                    mobile="new 4",
+                    email="new 5",
+                    )
+    app.object.edit_person_form(person)
+    new_persons = app.object.get_person_list()
+    assert len(old_persons) == len(new_persons)
+    old_persons[0] = person
+    assert sorted(old_persons, key=Person.id_or_max) == sorted(new_persons, key=Person.id_or_max)
