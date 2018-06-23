@@ -170,3 +170,4 @@ class ObjectHelper:
             firstname = cells[2].text
             persons.append(Person(name=firstname, lastname=lastname, id=id))
         return persons
+    
