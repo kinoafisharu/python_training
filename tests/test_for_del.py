@@ -22,5 +22,9 @@ def test_delete_first_person(app):
                                              mobile="test",
                                              )
                                       )
+    old_persons = app.object.get_person_list()
     app.object.delete_first_person()
-
+    new_persons = app.object.get_person_list()
+    assert len(old_persons) - 1 == len(new_persons)
+    old_persons[0:1] = []
+    assert old_persons == new_persons

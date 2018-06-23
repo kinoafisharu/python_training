@@ -157,3 +157,16 @@ class ObjectHelper:
             id = element.find_element_by_name("selected[]").get_attribute("value")
             groups.append(Group(name=text, id=id))
         return groups
+
+
+    def get_person_list(self):
+        wd = self.app.wd
+        self.open_person_page()
+        persons = []
+        for row in wd.find_elements_by_name("entry"):
+            cells = row.find_elements_by_tag_name("td")
+            id = cells[0].find_element_by_tag_name("input").get_attribute("value")
+            lastname = cells[1].text
+            firstname = cells[2].text
+            persons.append(Person(name=firstname, lastname=lastname, id=id))
+        return persons
