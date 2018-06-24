@@ -25,7 +25,7 @@ def test_add_empty_group(app):
                   )
     app.object.create_group_form(group)
     new_groups = app.object.get_group_list()
-    assert len(old_groups) + 1 == len(new_groups)
+    assert len(old_groups) + 1 == app.object.count_group()
     old_groups.append(group)
     assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
 
@@ -40,7 +40,7 @@ def test_add_person(app):
                     )
     app.object.create_person_form(person)
     new_persons = app.object.get_person_list()
-    assert len(old_persons) + 1 == len(new_persons)
+    assert len(old_persons) + 1 == app.object.count_person()
     old_persons.append(person)
     assert sorted(old_persons, key=Person.id_or_max) == sorted(new_persons, key=Person.id_or_max)
 

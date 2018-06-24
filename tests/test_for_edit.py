@@ -13,7 +13,7 @@ def test_edit_group_name(app):
     group.id = old_groups[0].id
     app.object.edit_first_group(group)
     new_groups = app.object.get_group_list()
-    assert len(old_groups) == len(new_groups)
+    assert len(old_groups) == app.object.count_group()
     old_groups[0] = group
     assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
 
@@ -26,7 +26,7 @@ def test_edit_group_header(app):
                                      )
                                )
     new_groups = app.object.get_group_list()
-    assert len(old_groups) == len(new_groups)
+    assert len(old_groups) == app.object.count_group()
 
 
 def test_edit_person(app):
@@ -47,6 +47,6 @@ def test_edit_person(app):
                     )
     app.object.edit_person_form(person)
     new_persons = app.object.get_person_list()
-    assert len(old_persons) == len(new_persons)
+    assert len(old_persons) == app.object.count_person()
     old_persons[0] = person
     assert sorted(old_persons, key=Person.id_or_max) == sorted(new_persons, key=Person.id_or_max)
