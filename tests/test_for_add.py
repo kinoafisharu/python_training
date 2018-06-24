@@ -12,7 +12,7 @@ def test_add_group(app):
                   )
     app.object.create_group_form(group)
     new_groups = app.object.get_group_list()
-    assert len(old_groups) + 1 == len(new_groups)
+    assert len(old_groups) + 1 == app.object.count_group()
     old_groups.append(group)
     assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
 
