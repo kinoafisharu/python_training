@@ -2,19 +2,20 @@
 
 from models.models import Group
 from models.models import Person
-
+from random import randrange
 
 
 def test_edit_group_name(app):
     if app.object.count_group() == 0:
         app.object.create_group_form(Group(name="test"))
     old_groups = app.object.get_group_list()
+    index = randrange(len(old_groups))
     group = Group(name="new test progon")
-    group.id = old_groups[0].id
-    app.object.edit_first_group(group)
+    group.id = old_groups[index].id
+    app.object.edit_group_by_index(index, group)
     new_groups = app.object.get_group_list()
     assert len(old_groups) == app.object.count_group()
-    old_groups[0] = group
+    old_groups[index] = group
     assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
 
 

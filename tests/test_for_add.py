@@ -2,6 +2,7 @@
 
 from models.models import Group
 from models.models import Person
+from random import randrange
 
 
 def test_add_group(app):

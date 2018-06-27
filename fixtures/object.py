@@ -71,15 +71,21 @@ class ObjectHelper:
             wd.find_element_by_name(field_name).send_keys(text)
 
     def delete_first_group(self):
+        self.delete_group_by_index(0)
+
+    def delete_group_by_index(self, index):
         wd = self.app.wd
         self.open_group_page()
-        self.select_first_group()
+        self.select_group_by_index(index)
         # submin deletion
         wd.find_element_by_name("delete").click()
         self.return_to_group_page()
         self.group_cache = None
 
     def delete_first_person(self):
+        self.delete_person_by_index(0)
+
+    def delete_person_by_index(self, index):
         wd = self.app.wd
         self.open_person_page()
         # select first person
@@ -89,10 +95,13 @@ class ObjectHelper:
         wd.switch_to_alert().accept()
         self.person_cache = None
 
-    def edit_first_group(self, new_group_data):
+    def edit_first_group(self, index, new_group_data):
+        self.edit_group_by_index(0, new_group_data)
+
+    def edit_group_by_index(self, index, new_group_data):
         wd = self.app.wd
         self.open_group_page()
-        self.select_first_group()
+        self.select_group_by_index(index)
         # submit edit
         wd.find_element_by_name("edit").click()
         # fill_first_group
@@ -116,6 +125,10 @@ class ObjectHelper:
     def select_first_group(self):
         wd = self.app.wd
         wd.find_element_by_name("selected[]").click()
+
+    def select_group_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_name("selected[]")[index].click()
 
     def count_group(self):
         wd = self.app.wd
