@@ -40,6 +40,7 @@ class ObjectHelper:
         wd.find_element_by_name("email").send_keys(person.email)
         # submit_person_creation
         wd.find_element_by_name("submit").click()
+        self.person_cache = None
 
     def return_to_group_page(self):
         wd = self.app.wd
@@ -86,6 +87,7 @@ class ObjectHelper:
         # submin deletion
         wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
         wd.switch_to_alert().accept()
+        self.person_cache = None
 
     def edit_first_group(self, new_group_data):
         wd = self.app.wd
@@ -150,6 +152,7 @@ class ObjectHelper:
         # submit_person_update
         wd.find_element_by_xpath("//div[@id='content']/form[1]/input[22]").click()
         wd.find_element_by_xpath("//div").click()
+        self.person_cache = None
 
     group_cache = None
 
@@ -164,15 +167,17 @@ class ObjectHelper:
                 self.group_cache.append(Group(name=text, id=id))
         return list(self.group_cache)
 
+    person_cache = None
 
     def get_person_list(self):
-        wd = self.app.wd
-        self.open_person_page()
-        persons = []
-        for row in wd.find_elements_by_name("entry"):
-            elements = row.find_elements_by_tag_name("td")
-            id = elements[0].find_element_by_tag_name("input").get_attribute("value")
-            lastname = elements[1].text
-            firstname = elements[2].text
-            persons.append(Person(name=firstname, lastname=lastname, id=id))
-        return persons
+        if self.person_cache is None:
+            wd = self.app.wd
+            self.open_person_page()
+            self.person_cache = []
+            for row in wd.find_elements_by_name("entry"):
+                elements = row.find_elements_by_tag_name("td")
+                id = elements[0].find_element_by_tag_name("input").get_attribute("value")
+                lastname = elements[1].text
+                firstname = elements[2].text
+                self.person_cache.append(Person(name=firstname, lastname=lastname, id=id))
+        return list(self.person_cache)
