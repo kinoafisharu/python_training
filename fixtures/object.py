@@ -95,7 +95,7 @@ class ObjectHelper:
         wd.switch_to_alert().accept()
         self.person_cache = None
 
-    def edit_first_group(self, index, new_group_data):
+    def edit_first_group(self, new_group_data):
         self.edit_group_by_index(0, new_group_data)
 
     def edit_group_by_index(self, index, new_group_data):
@@ -130,6 +130,10 @@ class ObjectHelper:
         wd = self.app.wd
         wd.find_elements_by_name("selected[]")[index].click()
 
+    def select_person_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_xpath("//table[@id='maintable']/tbody/tr/td[7]/a/img")[index].click()
+
     def count_group(self):
         wd = self.app.wd
         self.open_group_page()
@@ -141,10 +145,13 @@ class ObjectHelper:
         return len(wd.find_elements_by_name("selected[]"))
 
     def edit_person_form(self, person):
+        self.edit_person_form_by_index(0)
+
+    def edit_person_form_by_index(self, index, person):
         wd = self.app.wd
         self.open_person_page()
         # init_person_edit
-        wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[7]/a/img").click()
+        self.select_person_by_index(index)
         wd.find_element_by_name("modifiy").click()
         # fill_person_form
         wd.find_element_by_name("firstname").click()

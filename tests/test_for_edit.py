@@ -40,14 +40,16 @@ def test_edit_person(app):
                                              )
                                       )
     old_persons = app.object.get_person_list()
+    index = randrange(len(old_persons))
     person = Person(name="new 1",
                     lastname="new 2",
                     address="new 3",
                     mobile="new 4",
                     email="new 5",
                     )
-    app.object.edit_person_form(person)
+    person.id = old_persons[index].id
+    app.object.edit_person_form_by_index(index, person)
     new_persons = app.object.get_person_list()
     assert len(old_persons) == app.object.count_person()
-    old_persons[0] = person
+    old_persons[index] = person
     assert sorted(old_persons, key=Person.id_or_max) == sorted(new_persons, key=Person.id_or_max)
