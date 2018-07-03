@@ -33,6 +33,9 @@ class Person:
                  email=None,
                  mobile=None,
                  id=None,
+                 homephone=None,
+                 workphone=None,
+                 secondphone=None,
                  ):
         self.name = name
         self.lastname = lastname
@@ -40,6 +43,10 @@ class Person:
         self.email = email
         self.mobile = mobile
         self.id = id
+        self.homephone = homephone
+        self.workphone = workphone
+        self.secondphone = secondphone
+
 
     def __repr__(self):
         return "%s:%s" % (self.id, self.name)
