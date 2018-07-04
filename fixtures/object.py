@@ -203,11 +203,15 @@ class ObjectHelper:
                 id = elements[0].find_element_by_tag_name("input").get_attribute("value")
                 lastname = elements[1].text
                 firstname = elements[2].text
+                address = elements[3].text
+                all_emails = elements[4].text
                 all_phones = elements[5].text
                 self.person_cache.append(Person(
                                                 name=firstname,
                                                 lastname=lastname,
                                                 id=id,
+                                                address=address,
+                                                all_emails_frome_home_page=all_emails,
                                                 all_phones_frome_home_page=all_phones,
                                                 )
                                          )
@@ -233,18 +237,26 @@ class ObjectHelper:
         firstname = wd.find_element_by_name("firstname").get_attribute("value")
         lastname = wd.find_element_by_name("lastname").get_attribute("value")
         id = wd.find_element_by_name("id").get_attribute("value")
+        address = wd.find_element_by_name("address").get_attribute("value")
+        email = wd.find_element_by_name("email").get_attribute("value")
+        email2 = wd.find_element_by_name("email2").get_attribute("value")
+        email3 = wd.find_element_by_name("email3").get_attribute("value")
         homephone = wd.find_element_by_name("home").get_attribute("value")
         workphone = wd.find_element_by_name("work").get_attribute("value")
         mobile = wd.find_element_by_name("mobile").get_attribute("value")
         secondphone = wd.find_element_by_name("phone2").get_attribute("value")
         return Person(name=firstname,
-                        lastname=lastname,
-                        id=id,
-                        mobile=mobile,
-                        homephone=homephone,
-                        workphone=workphone,
-                        secondphone=secondphone,
-                        )
+                      lastname=lastname,
+                      id=id,
+                      address=address,
+                      email=email,
+                      email2=email2,
+                      email3=email3,
+                      mobile=mobile,
+                      homephone=homephone,
+                      workphone=workphone,
+                      secondphone=secondphone,
+                      )
 
 
     def get_person_from_view_page(self, index):
