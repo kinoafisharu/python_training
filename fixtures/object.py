@@ -203,15 +203,12 @@ class ObjectHelper:
                 id = elements[0].find_element_by_tag_name("input").get_attribute("value")
                 lastname = elements[1].text
                 firstname = elements[2].text
-                all_phones = elements[5].text.splitlines()
+                all_phones = elements[5].text
                 self.person_cache.append(Person(
                                                 name=firstname,
                                                 lastname=lastname,
                                                 id=id,
-                                                mobile=all_phones[1],
-                                                homephone=all_phones[0],
-                                                workphone=all_phones[2],
-                                                secondphone=all_phones[3],
+                                                all_phones_frome_home_page=all_phones,
                                                 )
                                          )
         return list(self.person_cache)

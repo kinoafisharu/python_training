@@ -36,6 +36,7 @@ class Person:
                  homephone=None,
                  workphone=None,
                  secondphone=None,
+                 all_phones_frome_home_page=None,
                  ):
         self.name = name
         self.lastname = lastname
@@ -46,6 +47,7 @@ class Person:
         self.homephone = homephone
         self.workphone = workphone
         self.secondphone = secondphone
+        self.all_phones_frome_home_page = all_phones_frome_home_page
 
 
     def __repr__(self):
